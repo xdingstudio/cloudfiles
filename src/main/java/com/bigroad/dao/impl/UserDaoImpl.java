@@ -9,10 +9,11 @@ import org.hibernate.metamodel.domain.Superclass;
 import org.springframework.stereotype.Repository;
 
 import com.bigroad.dao.UserDaoI;
-import com.bigroad.model.db.TFile;
 import com.bigroad.model.db.TUser;
+import com.sun.tools.internal.xjc.reader.xmlschema.bindinfo.BIConversion.User;
 
-@Repository("userDao")
+
+
 public   class UserDaoImpl extends BaseDaoImpl<TUser> implements UserDaoI{
 	
 	 
@@ -38,20 +39,7 @@ public   class UserDaoImpl extends BaseDaoImpl<TUser> implements UserDaoI{
 	@Override
 	public List<TUser> getUserbyDepart(String departmentID) {
 		// TODO Auto-generated method stub
-		String hqlstring="select TUsers from TDepartment d where d.departmentId='"+departmentID+"'";
-		List<TUser> filelist=super.find(hqlstring);
-		return filelist;
-	}
-
-	
-	@Override
-	public TUser getUserbyID(String userID) {
-		// TODO Auto-generated method stub
-		String hqlString ="from TUser u where u.userId=:userId";
-		Map<String,Object> map =new HashMap<String, Object>(); 
-		map.put("userId", userID);
-		TUser user = super.get(hqlString, map);
-		return user;
+		return null;
 	}
 
     

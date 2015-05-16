@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository;
 import com.bigroad.dao.BaseDAOI;
 
 
-@Repository("baseDao")
+//@Repository("baseDao")
 public class BaseDaoImpl<T> implements BaseDAOI<T> {
 	
 	 private SessionFactory sessionFactory;
@@ -25,7 +25,7 @@ public class BaseDaoImpl<T> implements BaseDAOI<T> {
             this.sessionFactory = sessionFactory;
      }
      private Session getCurrentSession() {
-            return this.sessionFactory.getCurrentSession();
+            return this.sessionFactory.openSession();
      }
 
      

@@ -4,8 +4,6 @@ import java.util.Date;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.bigroad.model.db.TUser;
-
 @XmlRootElement
 public class ShareJson {
 	
@@ -14,14 +12,13 @@ public class ShareJson {
 	private Integer filetype;
 	private String  fileId;
 	private String  fileName;
-	private String  shareSentPersonName;
+	private String  sentShareSentPersonName;
 	
-	public String getFileName() {
-		return fileName;
+	public String getSentShareSentPersonName() {
+		return sentShareSentPersonName;
 	}
-
-	public void setFileName(String fileName) {
-		this.fileName = fileName;
+	public void setSentShareSentPersonName(String sentShareSentPersonName) {
+		this.sentShareSentPersonName = sentShareSentPersonName;
 	}
 	public String getShareId() {
 		return shareId;
@@ -35,7 +32,6 @@ public class ShareJson {
 	public void setSentShareTime(Date sentShareTime) {
 		this.sentShareTime = sentShareTime;
 	}
-
 	public Integer getFiletype() {
 		return filetype;
 	}
@@ -48,13 +44,10 @@ public class ShareJson {
 	public void setFileId(String fileId) {
 		this.fileId = fileId;
 	}
-
-	public String getShareSentPersonName() {
-		return shareSentPersonName;
+	public String getFileName() {
+		return fileName;
 	}
-
-	public void setShareSentPersonName(String shareSentPersonName) {
-		this.shareSentPersonName = shareSentPersonName;
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
 	}
-
 }

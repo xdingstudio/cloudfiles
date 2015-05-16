@@ -6,9 +6,6 @@ import com.bigroad.model.db.TFile;
 
 public interface FileDaoI {
 	   
-	
-	  
-	  
 //	  根据文件ID查询文件用户ID
 	  public String getFileUserID(String fileID) ;	  
 //	  根据文件ID查询文件路径
@@ -52,7 +49,5 @@ public interface FileDaoI {
 	  public boolean  deleteFile(String fileID);
 //	  删除文件夹
 	  public boolean  deleteFolder(String folderID);
-	  
-	  public   TFile getTfileByID(String fileId) ;
 	  
 }
