@@ -1,2 +1,4 @@
 2015-05-15 22:14:31,340 ERROR com.alibaba.druid.pool.DruidAbstractDataSource - maxIdle is deprecated
 2015-05-15 22:14:33,094 WARN  org.hibernate.id.UUIDHexGenerator - HHH000409: Using org.hibernate.id.UUIDHexGenerator which does not generate IETF RFC 4122 compliant UUID values; consider using org.hibernate.id.UUIDGenerator instead
+2015-05-16 14:23:38,278 ERROR com.alibaba.druid.pool.DruidAbstractDataSource - maxIdle is deprecated
+2015-05-16 14:23:41,119 WARN  org.hibernate.id.UUIDHexGenerator - HHH000409: Using org.hibernate.id.UUIDHexGenerator which does not generate IETF RFC 4122 compliant UUID values; consider using org.hibernate.id.UUIDGenerator instead

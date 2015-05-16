@@ -70,44 +70,35 @@ public class FileDaoImpl extends BaseDaoImpl<TFile> implements FileDaoI {
 		super.update(tf);
 		return true;
 	}
-
+	
 	@Override
 	public boolean updatefolderParentID(String folderID, String targetFolderID) {
-		// TODO Auto-generated method stub
-		TFile tf=getTfileByID(folderID);		
-//		String oldFilePath = tf.getFilePath( ) + "/" + tf.getFileName( );//原始文件夹子路径
-//		updatefileParentID(folderID, targetFolderID);
-//		String newFilePath = tf.getFilePath( ) + "/" + tf.getFileName( );//新的文件夹子路径
-		
-		String ppn=tf.getFileName();//获得文件夹名字
-		String pp=tf.getFilePath();//获取文件夹路径
-		String ppp=pp+"/"+ppn;//文件夹 路径+文件夹名字，用于作为下层孩子原始路径
-		int pppLength = ppp.length();
-		
-		updatefileParentID(folderID, targetFolderID);
-		
-		String pf=tf.getFilePath()+"/"+ppn;//文件夹 修改后路径+名字，用于作为下层孩子修改后的路径
-				
-		List<TFile> fileList = getAllChildFile(folderID);
-		
-		for(TFile file : fileList)
-		{
-//			String childFilePath = file.getFilePath( );
-//			String filePath = newFilePath + childFilePath.substring(oldFilePath.length( )) ;//子文件新路径 
-//			file.setFilePath(filePath);
-//			super.update(file);
+		TFile tf=getTfileByID(folderID);//获得文件夹
+		String tfPath=tf.getFilePath();//文件夹路径
+		int tfPathLength=tfPath.length();
+	    String foldeID=tf.getTFile().getFileId();//文件夹的父目录ID
+	    TFile folderTFile=getTfileByID(foldeID);//获得文件夹的父文件夹
+	    //String folderName=folderTFile.getFileName();//文件夹的父文件名（文件夹路径tfPath=folderPath+"/"+folderName）
+	    String folderPath=folderTFile.getFilePath();//文件夹的父目录路径
+	    TFile targetTFile=getTfileByID(targetFolderID);//欲移往的文件夹
+	    String targetFileName=targetTFile.getFileName();//欲移往的文件夹名
+	    String newPath=folderPath+"/"+targetFileName;//移动后的路径，用于作为下层孩子修改后的路径
+	    	    
+	    List<TFile> fileList=getAllChildFile(folderID);
+		for (TFile file : fileList)
+		{     
 			
 			String pc=file.getFilePath();//获得孩子文件的当前路径
-			
-			String pcSubString = pc.substring(pppLength);
-			System.out.println(pcSubString+"----------------------------------------------------------");
-			String newPath = pf+pcSubString;
-			file.setFilePath(newPath);
+			String pcSubString = pc.substring(tfPathLength);
+			String subNewPath = newPath+pcSubString;
+			file.setFilePath(subNewPath);
 			super.update(file);
-		}		
+		} 
+		updatefileParentID(folderID,targetFolderID);
 		
 		return true;
 	}
+	
 
 	@Override
 	public boolean updateFileName(String fileID, String fileName) {
