@@ -1,6 +1,6 @@
 package com.bigroad.model.db;
 
-// Generated 2015-5-1 16:53:11 by Hibernate Tools 3.4.0.CR1
+// Generated 2015-4-25 13:01:25 by Hibernate Tools 3.4.0.CR1
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

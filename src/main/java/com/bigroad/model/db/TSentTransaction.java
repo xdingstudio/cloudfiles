@@ -1,6 +1,6 @@
 package com.bigroad.model.db;
 
-// Generated 2015-5-1 16:53:11 by Hibernate Tools 3.4.0.CR1
+// Generated 2015-4-25 13:01:25 by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -25,8 +25,7 @@ public class TSentTransaction implements java.io.Serializable {
 	private TUser TUserBySentTransactioncolPersonId;
 	private TUser TUserByReceiveTransactionPersonId;
 	private Date sentTransactionTime;
-	private String transactionName;
-	private Integer transactionState;
+	private String transactionState;
 
 	public TSentTransaction() {
 	}
@@ -38,13 +37,12 @@ public class TSentTransaction implements java.io.Serializable {
 	public TSentTransaction(String sentTransactionId,
 			TTransaction TTransaction, TUser TUserBySentTransactioncolPersonId,
 			TUser TUserByReceiveTransactionPersonId, Date sentTransactionTime,
-			String transactionName, Integer transactionState) {
+			String transactionState) {
 		this.sentTransactionId = sentTransactionId;
 		this.TTransaction = TTransaction;
 		this.TUserBySentTransactioncolPersonId = TUserBySentTransactioncolPersonId;
 		this.TUserByReceiveTransactionPersonId = TUserByReceiveTransactionPersonId;
 		this.sentTransactionTime = sentTransactionTime;
-		this.transactionName = transactionName;
 		this.transactionState = transactionState;
 	}
 
@@ -100,21 +98,12 @@ public class TSentTransaction implements java.io.Serializable {
 		this.sentTransactionTime = sentTransactionTime;
 	}
 
-	@Column(name = "transactionName", length = 100)
-	public String getTransactionName() {
-		return this.transactionName;
-	}
-
-	public void setTransactionName(String transactionName) {
-		this.transactionName = transactionName;
-	}
-
-	@Column(name = "transactionState")
-	public Integer getTransactionState() {
+	@Column(name = "transactionState", length = 45)
+	public String getTransactionState() {
 		return this.transactionState;
 	}
 
-	public void setTransactionState(Integer transactionState) {
+	public void setTransactionState(String transactionState) {
 		this.transactionState = transactionState;
 	}
 
