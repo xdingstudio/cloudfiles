@@ -25,7 +25,7 @@ public class folderSave {
     
     @Test
     public void testSave(){
-	      personfile.addNewFolder("123", "1111", "话花花");
+	      //personfile.addNewFolder("123", "1111", "话花花");
 	      
 	}
 }

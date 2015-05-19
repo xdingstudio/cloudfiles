@@ -21,5 +21,7 @@ public interface PersonFileServiceI {
     String  moveFile(String fileID,String targetFolderID,String fileType);
     String  updateFileName(String fileID,String fileType,String fileNewName);
     
-   String  saveFile(TFile f,String folderID,String userID);
+    String  saveFile(TFile f,String folderID,String userID);
+    
+    String moveFileToRecycle(String userID,String fileID,String fileType);
 }

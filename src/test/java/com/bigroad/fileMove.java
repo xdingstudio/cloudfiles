@@ -20,14 +20,14 @@ public class fileMove
         personfile = (PersonFileServiceI) ac.getBean("personFile");    
     }
     
-//    @Test
-//    public void testMoveFile(){
-//	      personfile.moveFile("2002", "2000", "file");
-//	}
+    @Test
+    public void testMoveFile(){
+	    //personfile.moveFile("1001", "1000", "file");
+	}
     
     @Test
     public void testMoveFolder(){
-	      personfile.moveFile("2000", "1000", "folder");
+	     // personfile.moveFile("2000", "3000", "folder");
 	}
 
 }

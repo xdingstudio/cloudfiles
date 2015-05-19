@@ -21,8 +21,9 @@ public interface FileDaoI {
 	  
 //	  查询用户的根目录
 	  public TFile  getRootFolderID(String UserID);
-//	  根据UserID查找回收站文件
-	  public List<TFile>  getRecycle(String UserID);
+//	  查询用户的回收站目录
+	  public TFile  getRecycleFolderID(String UserID);
+
 //	  根据用户ID和文件后缀名查询用户所属的对应类型文件
 	  public List<TFile> searchByfileExtension(String Extension,String userID);
 	  

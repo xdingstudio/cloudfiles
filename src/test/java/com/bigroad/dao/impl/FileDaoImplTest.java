@@ -26,7 +26,10 @@ public class FileDaoImplTest {
 	    }
 	    @Test
 	    public void testGetrecycle(){
-			List<TFile> list=filedao.getRecycle("123");
+	    	TFile recycleFile = filedao.getRecycleFolderID("123");
+			String recycleID=recycleFile.getFileId();
+			List<TFile> list=filedao.getByFolderID(recycleID);
+			//List<TFile> list=filedao.getRecycle("123");
 			if(list.equals(null))
 				log.info("user:123 recycle error!");
 			else{

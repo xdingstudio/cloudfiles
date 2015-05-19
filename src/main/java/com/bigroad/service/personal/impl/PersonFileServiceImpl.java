@@ -12,16 +12,12 @@ import com.bigroad.dao.UserDaoI;
 import com.bigroad.model.db.TFile;
 import com.bigroad.model.db.TUser;
 import com.bigroad.model.res.PersonFileJson;
+import com.bigroad.model.res.filelistConvertToPersonFileJson;
 import com.bigroad.service.personal.PersonFileServiceI;
 
 @Service("personFile")
 public class PersonFileServiceImpl implements PersonFileServiceI {
-
-	
-	
-	 /**
-     * 注入userDao
-     */
+	private filelistConvertToPersonFileJson listToJson =new filelistConvertToPersonFileJson();
     @Autowired
     private FileDaoI fileDao;
     
@@ -30,7 +26,6 @@ public class PersonFileServiceImpl implements PersonFileServiceI {
     
 	@Override
 	public List<PersonFileJson> getAllPersonFiles(String userID) {
-		// TODO Auto-generated method stub
 		TFile  folder = fileDao.getRootFolderID(userID);
 		String rootFolderID =  folder.getFileId();
 	    List<PersonFileJson> fileJsons = getchidFiles(rootFolderID);
@@ -43,61 +38,91 @@ public class PersonFileServiceImpl implements PersonFileServiceI {
 
 	@Override
     public	List<PersonFileJson> getchidFiles(String fileID){
-		// TODO Auto-generated method stub
 		 
-			List<TFile> filelist= fileDao.getByFolderID(fileID);
-			List<PersonFileJson> personFileList=new ArrayList<PersonFileJson>();
-		
-		    for(TFile file : filelist) {
-		    	PersonFileJson personFile=new PersonFileJson();
-		    	personFile.setFileId(file.getFileId());
-		    	personFile.setFileName(file.getFileName());
-		    	personFile.setFileType(file.getFileType());
-		    	personFile.setFileExtension(file.getFileExtension());
-		
-		    	personFileList.add(personFile);
-		    }
-		    return personFileList;
-
+		List<TFile> filelist= fileDao.getByFolderID(fileID);
+		List<PersonFileJson> personFileListJsonList=listToJson.listToJson(filelist);
+		return personFileListJsonList;
 	}
 
 	@Override
 	public List<PersonFileJson> getAllMusic(String userID) {
-		// TODO Auto-generated method stub
-		return null;
+		List<TFile> musiclist=fileDao.searchByfileExtension(".mp3", userID);
+		List<TFile> musiclist1=fileDao.searchByfileExtension(".rm", userID);
+		List<TFile> musiclist2=fileDao.searchByfileExtension(".wma", userID);
+		musiclist.addAll(musiclist1);
+		musiclist .addAll(musiclist2);
+		List<PersonFileJson> personFileListJsonList=listToJson.listToJson(musiclist);
+		return personFileListJsonList;
 	}
 
 	@Override
 	public List<PersonFileJson> getAllVedio(String userID) {
-		// TODO Auto-generated method stub
-		return null;
+		List<TFile> vediolist=fileDao.searchByfileExtension(".avi", userID);
+		List<TFile> vediolist1=fileDao.searchByfileExtension(".mov", userID);
+		List<TFile> vediolist2=fileDao.searchByfileExtension(".mpeg", userID);
+		List<TFile> vediolist3=fileDao.searchByfileExtension(".rm", userID);
+		List<TFile> vediolist4=fileDao.searchByfileExtension(".asf", userID);
+		vediolist .addAll(vediolist1);
+		vediolist .addAll(vediolist2);
+		vediolist .addAll(vediolist3);
+		vediolist .addAll(vediolist4);
+		List<PersonFileJson> personFileListJsonList=listToJson.listToJson(vediolist);
+		return personFileListJsonList;
 	}
 
 	@Override
 	public List<PersonFileJson> getAllPicture(String userID) {
-		// TODO Auto-generated method stub
-		return null;
+		List<TFile> picturelist=fileDao.searchByfileExtension(".bmp", userID);
+		List<TFile> picturelist1=fileDao.searchByfileExtension(".gif", userID);
+		List<TFile> picturelist2=fileDao.searchByfileExtension(".jpg", userID);
+		List<TFile> picturelist3=fileDao.searchByfileExtension(".tiff", userID);
+		List<TFile> picturelist4=fileDao.searchByfileExtension(".psd", userID);
+		List<TFile> picturelist5=fileDao.searchByfileExtension(".png", userID);
+		List<TFile> picturelist6=fileDao.searchByfileExtension(".swf", userID);
+		List<TFile> picturelist7=fileDao.searchByfileExtension(".svg", userID);
+		picturelist.addAll(picturelist1);
+		picturelist.addAll(picturelist2);
+		picturelist.addAll(picturelist3);
+		picturelist.addAll(picturelist4);
+		picturelist.addAll(picturelist5);
+		picturelist.addAll(picturelist6);
+		picturelist.addAll(picturelist7);
+		List<PersonFileJson> personFileListJsonList=listToJson.listToJson(picturelist);
+		return personFileListJsonList;
 	}
 
 	@Override
 	public List<PersonFileJson> getAllDocument(String userID) {
-		// TODO Auto-generated method stub
-		return null;
+		List<TFile> documentlist=fileDao.searchByfileExtension(".pdf", userID);
+		List<TFile> documentlist1=fileDao.searchByfileExtension(".doc", userID);
+		List<TFile> documentlist2=fileDao.searchByfileExtension(".ppt", userID);
+		List<TFile> documentlist3=fileDao.searchByfileExtension(".txt", userID);
+		List<TFile> documentlist4=fileDao.searchByfileExtension(".html", userID);
+		List<TFile> documentlist5=fileDao.searchByfileExtension(".zip", userID);
+		List<TFile> documentlist6=fileDao.searchByfileExtension(".rar", userID);
+		documentlist.addAll(documentlist1);
+		documentlist.addAll(documentlist2);
+		documentlist.addAll(documentlist3);
+		documentlist.addAll(documentlist4);
+		documentlist.addAll(documentlist5);
+		documentlist.addAll(documentlist6);
+		List<PersonFileJson> personFileListJsonList=listToJson.listToJson(documentlist);
+		return personFileListJsonList;
 	}
 
 	@Override
 	public List<PersonFileJson> getAllMyRecycle(String userID) {
-		// TODO Auto-generated method stub
-		return null;
+		TFile recycleFile = fileDao.getRecycleFolderID(userID);
+		String recycleID=recycleFile.getFileId();
+		List<TFile> myRecyclelist=fileDao.getByFolderID(recycleID);
+		List<PersonFileJson> personFileListJsonList=listToJson.listToJson(myRecyclelist);
+		return personFileListJsonList;
 	}
 
 	@Override
 	public String addNewFolder(String userID, String parentFileID,String folderName) {
-		// TODO Auto-generated method stub
-		
 				TFile folderFile = new TFile();
 				folderFile.setFileName(folderName);
-				//folderFile.getTUser().setUserId(userID);
 				TUser user = userDao.getUserbyID(userID);
 				folderFile.setTUser(user);
 				folderFile.setFileNewTime(new Date());
@@ -112,7 +137,6 @@ public class PersonFileServiceImpl implements PersonFileServiceI {
 
 	@Override
 	public String deleteFile(String fileID, String fileType) {
-		// TODO Auto-generated method stub
 		if(fileType.equals("file") )
 		{
 			fileDao.deleteFile(fileID);
@@ -146,7 +170,6 @@ public class PersonFileServiceImpl implements PersonFileServiceI {
 	@Override
 	public String updateFileName(String fileID, String fileType,
 			String fileNewName) {
-		// TODO Auto-generated method stub
 		if(fileType.equals("file"))
 		{
 			fileDao.updateFileName(fileID, fileNewName);
@@ -162,8 +185,6 @@ public class PersonFileServiceImpl implements PersonFileServiceI {
 
 	@Override
 	public String saveFile(TFile f, String folderID, String userID) {
-		// TODO Auto-generated method stub
-		System.out.println(folderID+"--------------------------------------------");
 		TFile folderFile=fileDao.getTfileByID(folderID);
 		String folderName = folderFile.getFileName();
 		String folderPath = folderFile.getFilePath();
@@ -174,6 +195,15 @@ public class PersonFileServiceImpl implements PersonFileServiceI {
 		f.setTUser(u);
 		f.setTFile(folderFile);
 		fileDao.saveFile(f);
+		return "success";
+	}
+
+	@Override
+	public String moveFileToRecycle(String userID, String fileID,String fileType) {
+		
+		TFile recycleFile = fileDao.getRecycleFolderID(userID);
+		String recycleID=recycleFile.getFileId();
+		moveFile(fileID, recycleID, fileType);
 		return "success";
 	}
 

@@ -1,4 +1,35 @@
 2015-05-15 22:14:31,340 ERROR com.alibaba.druid.pool.DruidAbstractDataSource - maxIdle is deprecated
 2015-05-15 22:14:33,094 WARN  org.hibernate.id.UUIDHexGenerator - HHH000409: Using org.hibernate.id.UUIDHexGenerator which does not generate IETF RFC 4122 compliant UUID values; consider using org.hibernate.id.UUIDGenerator instead
-2015-05-16 14:23:38,278 ERROR com.alibaba.druid.pool.DruidAbstractDataSource - maxIdle is deprecated
-2015-05-16 14:23:41,119 WARN  org.hibernate.id.UUIDHexGenerator - HHH000409: Using org.hibernate.id.UUIDHexGenerator which does not generate IETF RFC 4122 compliant UUID values; consider using org.hibernate.id.UUIDGenerator instead
+2015-05-16 08:17:38,348 ERROR com.alibaba.druid.pool.DruidAbstractDataSource - maxIdle is deprecated
+2015-05-16 08:17:41,435 WARN  org.hibernate.id.UUIDHexGenerator - HHH000409: Using org.hibernate.id.UUIDHexGenerator which does not generate IETF RFC 4122 compliant UUID values; consider using org.hibernate.id.UUIDGenerator instead
+2015-05-16 08:19:15,219 ERROR com.alibaba.druid.pool.DruidAbstractDataSource - maxIdle is deprecated
+2015-05-16 08:19:16,183 WARN  org.hibernate.id.UUIDHexGenerator - HHH000409: Using org.hibernate.id.UUIDHexGenerator which does not generate IETF RFC 4122 compliant UUID values; consider using org.hibernate.id.UUIDGenerator instead
+2015-05-16 08:21:52,740 ERROR com.alibaba.druid.pool.DruidAbstractDataSource - maxIdle is deprecated
+2015-05-16 08:21:53,672 WARN  org.hibernate.id.UUIDHexGenerator - HHH000409: Using org.hibernate.id.UUIDHexGenerator which does not generate IETF RFC 4122 compliant UUID values; consider using org.hibernate.id.UUIDGenerator instead
+2015-05-16 10:35:26,932 ERROR com.alibaba.druid.pool.DruidAbstractDataSource - maxIdle is deprecated
+2015-05-16 10:35:28,971 WARN  org.hibernate.id.UUIDHexGenerator - HHH000409: Using org.hibernate.id.UUIDHexGenerator which does not generate IETF RFC 4122 compliant UUID values; consider using org.hibernate.id.UUIDGenerator instead
+2015-05-16 10:35:29,846 ERROR com.alibaba.druid.pool.DruidAbstractDataSource - maxIdle is deprecated
+2015-05-16 10:40:09,762 ERROR com.alibaba.druid.pool.DruidAbstractDataSource - maxIdle is deprecated
+2015-05-16 10:40:10,699 WARN  org.hibernate.id.UUIDHexGenerator - HHH000409: Using org.hibernate.id.UUIDHexGenerator which does not generate IETF RFC 4122 compliant UUID values; consider using org.hibernate.id.UUIDGenerator instead
+2015-05-16 10:40:11,291 ERROR com.alibaba.druid.pool.DruidAbstractDataSource - maxIdle is deprecated
+2015-05-16 10:43:38,563 ERROR com.alibaba.druid.pool.DruidAbstractDataSource - maxIdle is deprecated
+2015-05-16 10:43:39,521 WARN  org.hibernate.id.UUIDHexGenerator - HHH000409: Using org.hibernate.id.UUIDHexGenerator which does not generate IETF RFC 4122 compliant UUID values; consider using org.hibernate.id.UUIDGenerator instead
+2015-05-16 10:43:40,106 ERROR com.alibaba.druid.pool.DruidAbstractDataSource - maxIdle is deprecated
+2015-05-16 11:07:03,595 ERROR com.alibaba.druid.pool.DruidAbstractDataSource - maxIdle is deprecated
+2015-05-16 11:07:04,591 WARN  org.hibernate.id.UUIDHexGenerator - HHH000409: Using org.hibernate.id.UUIDHexGenerator which does not generate IETF RFC 4122 compliant UUID values; consider using org.hibernate.id.UUIDGenerator instead
+2015-05-16 11:15:50,558 ERROR com.alibaba.druid.pool.DruidAbstractDataSource - maxIdle is deprecated
+2015-05-16 11:15:51,837 WARN  org.hibernate.id.UUIDHexGenerator - HHH000409: Using org.hibernate.id.UUIDHexGenerator which does not generate IETF RFC 4122 compliant UUID values; consider using org.hibernate.id.UUIDGenerator instead
+2015-05-16 11:15:52,896 ERROR com.alibaba.druid.pool.DruidAbstractDataSource - maxIdle is deprecated
+2015-05-16 11:17:16,844 ERROR com.alibaba.druid.pool.DruidAbstractDataSource - maxIdle is deprecated
+2015-05-16 11:17:17,878 WARN  org.hibernate.id.UUIDHexGenerator - HHH000409: Using org.hibernate.id.UUIDHexGenerator which does not generate IETF RFC 4122 compliant UUID values; consider using org.hibernate.id.UUIDGenerator instead
+2015-05-16 11:17:18,593 ERROR com.alibaba.druid.pool.DruidAbstractDataSource - maxIdle is deprecated
+2015-05-16 11:24:49,182 ERROR com.alibaba.druid.pool.DruidAbstractDataSource - maxIdle is deprecated
+2015-05-16 11:24:50,192 WARN  org.hibernate.id.UUIDHexGenerator - HHH000409: Using org.hibernate.id.UUIDHexGenerator which does not generate IETF RFC 4122 compliant UUID values; consider using org.hibernate.id.UUIDGenerator instead
+2015-05-16 11:24:50,835 ERROR com.alibaba.druid.pool.DruidAbstractDataSource - maxIdle is deprecated
+2015-05-16 11:30:18,664 ERROR com.alibaba.druid.pool.DruidAbstractDataSource - maxIdle is deprecated
+2015-05-16 11:30:19,597 WARN  org.hibernate.id.UUIDHexGenerator - HHH000409: Using org.hibernate.id.UUIDHexGenerator which does not generate IETF RFC 4122 compliant UUID values; consider using org.hibernate.id.UUIDGenerator instead
+2015-05-16 11:40:19,903 ERROR com.alibaba.druid.pool.DruidAbstractDataSource - maxIdle is deprecated
+2015-05-16 11:40:20,994 WARN  org.hibernate.id.UUIDHexGenerator - HHH000409: Using org.hibernate.id.UUIDHexGenerator which does not generate IETF RFC 4122 compliant UUID values; consider using org.hibernate.id.UUIDGenerator instead
+2015-05-16 11:40:21,701 ERROR com.alibaba.druid.pool.DruidAbstractDataSource - maxIdle is deprecated
+2015-05-16 14:14:19,659 ERROR com.alibaba.druid.pool.DruidAbstractDataSource - maxIdle is deprecated
+2015-05-16 14:14:25,255 WARN  org.hibernate.id.UUIDHexGenerator - HHH000409: Using org.hibernate.id.UUIDHexGenerator which does not generate IETF RFC 4122 compliant UUID values; consider using org.hibernate.id.UUIDGenerator instead
