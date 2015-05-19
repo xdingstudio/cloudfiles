@@ -580,7 +580,7 @@
 					   else if(value.fileType == '0')
 					   {
 						    $("#divall").append(
-						  "<li class='doc'>" +"<div class='filediv' id='"+value.fileId+"'>"+"<input type='text' class='changename' value='"+value.fileName+"'>"+"</div>" +"</li>"
+						  "<li class='"+value.fileExtension.substring(1)+"'>" +"<div class='filediv' id='"+value.fileId+"'>"+"<input type='text' class='changename' value='"+value.fileName+"'>"+"</div>" +"</li>"
 						 );
 					   }
 					  //alert(value.fileType);
@@ -678,8 +678,8 @@ $("body").on("mousedown",".folder",function(e){
 								   else if(value.fileType == 0)
 								   {
 									    $("#divall").append(
-									  "<li class='doc'>" +"<div class='filediv' id='"+value.fileId+"'>"+"<input type='text' class='changename' value='"+value.fileName+"'>"+"</div>" +"</li>"
-									 );
+									    		 "<li class='"+value.fileExtension.substring(1)+"'>" +"<div class='filediv' id='"+value.fileId+"'>"+"<input type='text' class='changename' value='"+value.fileName+"'>"+"</div>" +"</li>"
+									    		 );
 								   };
 							      
 								//	$.parser.parse(targetObj);
