@@ -71,7 +71,7 @@
 					</a><!-- /.brand -->
 				</div><!-- /.navbar-header -->
 				<div class="navbar-header pull-left">
-					<a href="index.html" class="navbar-brand" style="margin-left:10px">
+					<a href="myDropBox.html" class="navbar-brand" style="margin-left:10px">
 						<small>
 							我的网盘
 						</small>
@@ -363,33 +363,33 @@
 				
 
 						<li>
-							<a href="#" id="picture" class="typeShow">
+							<a href="#">
 								<i class="icon-picture"></i>
 								<span class="menu-text"> 图片 </span>
 							</a>
 						</li>
 						<li>
-							<a href="#" id="video" class="typeShow">
+							<a href="#">
 								<i class=" icon-film"></i>
 								<span class="menu-text"> 视频 </span>
 							</a>
 						</li>
 						<li>
-							<a href="#" id="document" class="typeShow">
+							<a href="#">
 								<i class="icon-folder-close-alt"></i>
 								<span class="menu-text"> 文档 </span>
 							</a>
 						</li>
 						<li>
-							<a href="#" id="music" class="typeShow">
+							<a href="#">
 								<i class="icon-music"></i>
 								<span class="menu-text"> 音乐 </span>
 							</a>
 						</li>
 						<li>
-							<a href="#" id="recycle" class="typeShow">
+							<a href="#">
 								<i class="icon-heart"></i>
-								<span class="menu-text"> 回收站 </span>
+								<span class="menu-text"> 收藏 </span>
 							</a>
 						</li>
 					</ul><!-- /.nav-list -->
@@ -580,7 +580,7 @@
 					   else if(value.fileType == '0')
 					   {
 						    $("#divall").append(
-						  "<li class='doc'>" +"<div class='filediv' id='"+value.fileId+"'>"+"<input type='text' class='changename' value='"+value.fileName+"'>"+"</div>" +"</li>"
+						  "<li class='"+fileExtension+"'>" +"<div class='filediv' id='"+value.fileId+"'>"+"<input type='text' class='changename' value='"+value.fileName+"'>"+"</div>" +"</li>"
 						 );
 					   }
 					  //alert(value.fileType);
@@ -658,7 +658,7 @@
                                                                                        else if(value.fileType == 0)
                                                                                        {
                                                                                             $("#divall").append(
-                                                                                          "<li class='doc'>" +"<div class='filediv' id='"+value.fileId+"'>"+"<input type='text' class='changename' value='"+value.fileName+"'>"+"</div>" +"</li>"
+                                                                                          "<li class='"+fileExtension+"'>" +"<div class='filediv' id='"+value.fileId+"'>"+"<input type='text' class='changename' value='"+value.fileName+"'>"+"</div>" +"</li>"
                                                                                              );
                                                                                        };	      
                                                                                     //	$.parser.parse(targetObj);
@@ -717,13 +717,7 @@
 				func: function() {
 					  alert("1");
 				}
-			}],
-                    [{
-                    text: "移动文件夹",
-                    func: function() {
-                          moveFile("folder",opFileID);
-                    }
-                     }]
+			}]
 		];
 
 	
@@ -743,7 +737,7 @@ $("body").on("mousedown",".folder",function(e){
 						$.smartMenu.remove();}
 
 				});
-                                                                                            opFileID=$(this).children().attr("id");
+                                                                                               opFileID=$(this).children().attr("id");
                                                                                             filefilefilename =$(this).children().children().val();
 		        }  
 		 
@@ -797,7 +791,7 @@ $("body").on("mousedown",".folder",function(e){
 								   else if(value.fileType == 0)
 								   {
 									    $("#divall").append(
-									  "<li class='doc'>" +"<div class='filediv' id='"+value.fileId+"'>"+"<input type='text' class='changename' value='"+value.fileName+"'>"+"</div>" +"</li>"
+									  "<li class='"+fileExtension+"'>" +"<div class='filediv' id='"+value.fileId+"'>"+"<input type='text' class='changename' value='"+value.fileName+"'>"+"</div>" +"</li>"
 									     );
 								   };	      
 								//	$.parser.parse(targetObj);
@@ -819,24 +813,7 @@ $("body").on("mousedown",".folder",function(e){
 		  });
 
                 
-                                                                                        $("body").on("mousedown","",function(e){
-                        
-                                                                                                //DoSomeThing
-                                                                                                var e = e || window.event  
-
-                                                                                                if(e.button == "2"){  
-                                                                                                    $(this).smartMenu(bodymenu, {
-                                                                                                        name: "mail",
-                                                                                                        beforeShow: function() {
-
-                                                                                                        //动态数据，及时清除
-                                                                                                        $.smartMenu.remove();}
-
-                                                                                                });
-                                                                                            }  
-                                                                                          });
                 
-                var bodymenu=[]
                                                                                             $("body").on("mousedown",".doc",function(e){
 
                                                                                                 //DoSomeThing
@@ -856,7 +833,22 @@ $("body").on("mousedown",".folder",function(e){
                                                                                           });
                 
                 
-                                                                                                 
+                                                                                                 $("body").on("mousedown","",function(e){
+
+                                                                                                //DoSomeThing
+                                                                                                var e = e || window.event  
+
+                                                                                                if(e.button == "2"){  
+                                                                                                    $(this).smartMenu(filemenu, {
+                                                                                                        name: "mail",
+                                                                                                        beforeShow: function() {
+
+                                                                                                        //动态数据，及时清除
+                                                                                                        $.smartMenu.remove();}
+
+                                                                                                });
+                                                                                            }  
+                                                                                          });
                 
 
 		var filemenu = [
@@ -902,13 +894,7 @@ $("body").on("mousedown",".folder",function(e){
 				func: function() {
 					  alert("1");
 				}
-			}],
-                    [{
-                    text: "移动文件",
-                    func: function() {
-                         moveFile("file",opFileID);
-                    }
-                     }]
+			}]
 		];
 
 
@@ -961,78 +947,7 @@ $("body").on("mousedown",".folder",function(e){
                     
 	   }); 
 		
-        
-                
-		function moveFile(flag,id){
-         bodymenu=[
-                    [{
-                    text: "粘贴",
-                    func: function() {
-                        
-                        confirmmove(flag,id);
-                    }
-                     }]
-                ]
-        }
-                
-                
-        function confirmmove(flag,id){
-            bodymenu=[];
-            var folderid =$("#filepath li:last-child").attr("id");
-            if(flag=="file")
-            {
-                alert("file"+folderid);
-                var urlN = 'v1.0/person/'+userID+'/'+folderid+'/'+id;
-                alert("url"+urlN);
-                var name = $(this).children().val();
-                    $.ajax({
-                    type: 'PUT',
-                    url:urlN,
-                    data: {},
-                    async:false,
-                    success: function(data){
-                        refreshPage(folderid,userID);
-                    },
-                    error: function()
-                    {
-                        alert("fail");
-                        refreshPage(folderid,userID);
-                    },
-                    headers: {
-                        "X-Auth-Token":"sss"
-                    }
-               });
-            }
-            else
-            {
-                alert("folder"+folderid);
-                var urlN = 'v1.0/person/'+userID+'/'+id;
-                alert("url"+urlN);
-                var name = $(this).children().val();
-                    $.ajax({
-                    type: 'PUT',
-                    url:urlN,
-                    data: {"targetFolderID":folderid},
-                    async:false,
-                    success: function(data){
-                        refreshPage(folderid,userID);
-                    },
-                    error: function()
-                    {
-                        alert("fail");
-                        refreshPage(folderid,userID);
-                    },
-                    headers: {
-                        "X-Auth-Token":"sss"
-                    }
-               });
-               
-            }
-        }
-                
-              
-                
-                
+		
 		 function uploadFile() {
 	          
 			 var folderid =   $("#filepath li:last-child").attr("id");
@@ -1084,8 +999,7 @@ $("body").on("mousedown",".folder",function(e){
    						}
    			       });
 		     }
-               
- 
+                
              function refreshPage(folderId,usrId)
 				{
                     
@@ -1116,7 +1030,7 @@ $("body").on("mousedown",".folder",function(e){
 									   else if(value.fileType == 0)
 									   {
 										    $("#divall").append(
-										  "<li class='doc'>" +"<div class='filediv' id='"+value.fileId+"'>"+"<input type='text' class='changename' value='"+value.fileName+"'>"+"</div>" +"</li>"
+										  "<li class='"+fileExtension+"'>" +"<div class='filediv' id='"+value.fileId+"'>"+"<input type='text' class='changename' value='"+value.fileName+"'>"+"</div>" +"</li>"
 										 );
 									   };
 								      
@@ -1133,67 +1047,12 @@ $("body").on("mousedown",".folder",function(e){
 							}
 				       });
 				}
-                
-                $(".typeShow").on('click',function(){
-                    //typeShow("picture");
-                   // alert("typeshow");
-                    var id=$(this).attr("id");
-                    typeShow(id);
-                });
-                function typeShow(type){
-                  //  alert("type： "+type);
-               
-                var urlN = 'v1.0/person/'+userID+'/'+type;
-					 $.ajax({
-							type: 'GET',
-							url:urlN,
-							dataType:'json',
-							data: {},
-							async:false,
-							success: function(data){
-                                var jsonData = eval(data);
-                                var lengthhhh=0;
-                                $("#divall").empty();
-                                $.each(jsonData.personFileJson, function(id, value) {
-                                    //alert("llllllllllllll:"+lengthhhh);
-                                    if(value.fileType == 1)
-                                    {
-                                        lengthhhh++;
-                                        $("#divall").append(
-                                            "<li class='folder'>" +"<div class='folderdiv' id='"+value.fileId+"'>"+"<input type='text' class='changename' value='"+value.fileName+"'>"+"</div>" +"</li>"
-                                             );
-                                    }
-                                    else if(value.fileType == 0)
-                                    {
-                                        lengthhhh++;
-                                        $("#divall").append(
-                                            "<li class='doc'>" +"<div class='filediv' id='"+value.fileId+"'>"+"<input type='text' class='changename' value='"+value.fileName+"'>"+"</div>" +"</li>"
-                                             );
-                                    };
-								});
-							     if(lengthhhh==0)
-                                 {
-                                     $("#divall").append(
-                                            "<li>"+"<h1>无满足类型的文件!</h1>" +"</li>"
-                                             );
-                                 }
-							},
-							error: function()
-							{
-								alert("fail");
-							},
-							headers: {
-								"X-Auth-Token":"sss"
-							}
-				       });
-               
-           }
-                
+             
+             function enterRecyle(usrId)
 
 });
 			
-           
-                
+
 </script>
 	
 </body>
