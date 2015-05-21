@@ -150,7 +150,7 @@ public class Personal {
 	@DELETE
 	// 删除文件,放到回收站
 	@Path("{userid}/{folderid}/{fileid}")
-	@Produces(MediaType.APPLICATION_JSON)
+	//@Produces(MediaType.APPLICATION_JSON)
 	public Response deleteFile(@PathParam("userid") String userID,
 			@PathParam("fileid") String fileID, @Context HttpHeaders headers) {
 		if (headers.getRequestHeaders().getFirst("X-Auth-Token").equals("sss")) {
@@ -165,7 +165,7 @@ public class Personal {
 	@DELETE
 	// 删除文件夹,放到回收站
 	@Path("{userid}/{folderid}")
-	@Produces(MediaType.APPLICATION_JSON)
+	//@Produces(MediaType.APPLICATION_JSON)
 	public Response deleteFolder(@PathParam("userid") String userID,
 			@PathParam("folderid") String folderID,
 			@FormParam("targetFolderID") String targetFolderID,
