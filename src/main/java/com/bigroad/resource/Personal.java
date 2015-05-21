@@ -339,34 +339,38 @@ public class Personal {
 			return new ArrayList<PersonFileJson>();
 		}
 	}
-
+	
 	@PUT
-	// 从回收站回收                                                               (就差这个从回收站还原的功能啦！)
-	@Path("{userid}/recover/{fileid}")
+	// 从回收站回收 文件                                                              
+	@Path("{userid}/recover/{folderid}/{fileid}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response recoverRecycleFile(@PathParam("fileid") String fileID,
-			@FormParam("filetype") String fileType,
+			@PathParam("folderid") String targetFolderID,
 			@Context HttpHeaders headers) {
-		if (headers.getRequestHeaders().getFirst("X-Auth-Token").equals("sss")) 
-		{
-			if (fileType.equals("file")) 
-			{
-				//......
-				System.out.println("----------------" + fileID + " " + fileType);
-				return Response.ok().build();
-			} 
-			else if (fileType.equals("folder")) 
-			{
-				//.....
-				System.out.println("----------------" + fileID + " " + fileType);
-				return Response.ok().build();
-			}
-			return Response.status(403).build();
-		} 
-		else 
-		{
+		if (headers.getRequestHeaders().getFirst("X-Auth-Token").equals("sss")) {
+			personFile.moveFile(fileID, targetFolderID, "file");
+			System.out.println(fileID + " " + targetFolderID);
+			return Response.ok().build();
+		} else {
 			return Response.status(403).build();
 		}
 	}
+	
+	@PUT
+	// 从回收站回收文件夹                                                               
+	@Path("{userid}/recover/{folderid}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response recoverRecycleFolder(@PathParam("folderid") String folderID,
+			@FormParam("targetFolderID") String targetFolderID,
+			@Context HttpHeaders headers) {
+		if (headers.getRequestHeaders().getFirst("X-Auth-Token").equals("sss")) {
+			personFile.moveFile(folderID, targetFolderID, "folder");
+			System.out.println(folderID + " " + targetFolderID);
+			return Response.ok().build();
+		} else {
+			return Response.status(403).build();
+		}
+	}
+	
 
 }
