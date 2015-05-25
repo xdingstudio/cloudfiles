@@ -121,14 +121,16 @@ public class PersonFileServiceImpl implements PersonFileServiceI {
 
 	@Override
 	public String addNewFolder(String userID, String parentFileID,String folderName) {
+		
 				TFile folderFile = new TFile();
-				folderFile.setFileName(folderName);
+				TFile tFile  = fileDao.getTfileByID(parentFileID);
+				folderFile.setTFile(tFile);
 				TUser user = userDao.getUserbyID(userID);
 				folderFile.setTUser(user);
+				folderFile.setFileName(folderName);
 				folderFile.setFileNewTime(new Date());
 				folderFile.setFileType(1);
 				folderFile.setFileExtension("folder");
-				TFile tFile  = fileDao.getTfileByID(parentFileID);
 				String path = tFile.getFilePath()+"/"+tFile.getFileName();
 				folderFile.setFilePath(path);
 				fileDao.saveFile(folderFile);

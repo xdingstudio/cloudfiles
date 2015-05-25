@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.activation.MimetypesFileTypeMap;
+import javax.servlet.ServletContext;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
@@ -18,6 +20,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
@@ -95,7 +98,7 @@ public class Personal {
 			@PathParam("folderid") String folderID) {
 		System.out.println(folderID
 				+ "-----------------------------------------------------");
-		String uploadedFileLocation = "/home/hadoop/uploaded/"
+		String uploadedFileLocation = "D://upload/"
 				+ fileDetail.getFileName();
 		// save it
 		writeToFile(uploadedInputStream, uploadedFileLocation);
@@ -108,9 +111,7 @@ public class Personal {
 			e.printStackTrace();
 		}
 		String fieName = fileDetail.getFileName();
-		CloudFileCon con = new CloudFileCon();
-		con.uploadFile("photos", fieName, file);
-		file.delete();
+	
 		TFile tFile = new TFile();
 
 		String fileExt = fieName.substring(fieName.lastIndexOf("."));
@@ -195,8 +196,8 @@ public class Personal {
 	}
 
 	@POST
-	@Path("{userid}/{folderid}")
-	@Produces(MediaType.APPLICATION_JSON)
+	@Path("name/{userid}/{folderid}")
+	
 	public Response changeFolderName(@PathParam("folderid") String folderID,
 			@FormParam("foldername") String foldername,
 			@Context HttpHeaders headers) {
@@ -211,7 +212,7 @@ public class Personal {
 
 	@PUT
 	@Path("{userid}/{folderid}/{fileid}")
-	@Produces(MediaType.APPLICATION_JSON)
+	//@Produces(MediaType.APPLICATION_JSON)
 	public Response moveFile(@PathParam("fileid") String fileID,
 			@PathParam("folderid") String targetFolderID,
 			@Context HttpHeaders headers) {
@@ -226,7 +227,7 @@ public class Personal {
 
 	@PUT
 	@Path("{userid}/{folderid}")
-	@Produces(MediaType.APPLICATION_JSON)
+	//@Produces(MediaType.APPLICATION_JSON)
 	public Response moveFolder(@PathParam("folderid") String folderID,
 			@FormParam("targetFolderID") String targetFolderID,
 			@Context HttpHeaders headers) {
@@ -242,7 +243,7 @@ public class Personal {
 	@DELETE
 	// 删除回收站文件
 	@Path("{userid}/recycle/{folderid}/{fileid}")
-	@Produces(MediaType.APPLICATION_JSON)
+	//@Produces(MediaType.APPLICATION_JSON)
 	public Response deleteRecFile(@PathParam("fileid") String fileid,
 			@Context HttpHeaders headers) {
 		if (headers.getRequestHeaders().getFirst("X-Auth-Token").equals("sss")) {
@@ -257,7 +258,7 @@ public class Personal {
 	@DELETE
 	// 删除回收站文件夹
 	@Path("{userid}/recycle/{folderid}")
-	@Produces(MediaType.APPLICATION_JSON)
+	//@Produces(MediaType.APPLICATION_JSON)
 	public Response deleteRecFolder(@PathParam("folderid") String folderid,
 			@Context HttpHeaders headers) {
 		if (headers.getRequestHeaders().getFirst("X-Auth-Token").equals("sss")) {
@@ -339,38 +340,53 @@ public class Personal {
 			return new ArrayList<PersonFileJson>();
 		}
 	}
+
+//	@PUT
+//	// 从回收站回收                                                               (就差这个从回收站还原的功能啦！)
+//	@Path("{userid}/recover/{fileid}")
+//	@Produces(MediaType.APPLICATION_JSON)
+//	public Response recoverRecycleFile(@PathParam("fileid") String fileID,
+//			@FormParam("filetype") String fileType,
+//			@Context HttpHeaders headers) {
+//		if (headers.getRequestHeaders().getFirst("X-Auth-Token").equals("sss")) 
+//		{
+//			if (fileType.equals("file")) 
+//			{
+//				//......
+//				System.out.println("----------------" + fileID + " " + fileType);
+//				return Response.ok().build();
+//			} 
+//			else if (fileType.equals("folder")) 
+//			{
+//				//.....
+//				System.out.println("----------------" + fileID + " " + fileType);
+//				return Response.ok().build();
+//			}
+//			return Response.status(403).build();
+//		} 
+//		else 
+//		{
+//			return Response.status(403).build();
+//		}
+//	}
 	
-	@PUT
-	// 从回收站回收 文件                                                              
-	@Path("{userid}/recover/{folderid}/{fileid}")
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response recoverRecycleFile(@PathParam("fileid") String fileID,
-			@PathParam("folderid") String targetFolderID,
-			@Context HttpHeaders headers) {
-		if (headers.getRequestHeaders().getFirst("X-Auth-Token").equals("sss")) {
-			personFile.moveFile(fileID, targetFolderID, "file");
-			System.out.println(fileID + " " + targetFolderID);
-			return Response.ok().build();
-		} else {
-			return Response.status(403).build();
-		}
+	@GET
+	@Path("download/{userid}/{folderid}/{fileid}/{filename}")
+	@Produces(MediaType.APPLICATION_OCTET_STREAM)
+	public Response downloadFile(
+			@PathParam("fileid") String fileID,
+			@PathParam("filename") String fileName,
+			@Context ServletContext application){
+		
+		   String uploadedFileLocation = "D://upload/"+ fileName;
+		   System.out.println(uploadedFileLocation+"---------------------------------------------------");
+		   File file = new File(uploadedFileLocation);
+		   if (!file.exists()) {
+	           throw new WebApplicationException(404);
+	       }
+
+	       String mt = new MimetypesFileTypeMap().getContentType(file);
+	       return Response.ok(file, mt).header("", "").build();
 	}
-	
-	@PUT
-	// 从回收站回收文件夹                                                               
-	@Path("{userid}/recover/{folderid}")
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response recoverRecycleFolder(@PathParam("folderid") String folderID,
-			@FormParam("targetFolderID") String targetFolderID,
-			@Context HttpHeaders headers) {
-		if (headers.getRequestHeaders().getFirst("X-Auth-Token").equals("sss")) {
-			personFile.moveFile(folderID, targetFolderID, "folder");
-			System.out.println(folderID + " " + targetFolderID);
-			return Response.ok().build();
-		} else {
-			return Response.status(403).build();
-		}
-	}
-	
 
 }

@@ -6,8 +6,21 @@
 .folder.bgclocrc{background:url(images/folder.png) center top no-repeat #f1f2fd;border:1px solid #a7aae3;}
 .folder:hover{background:url(images/folder.png) center top no-repeat #f1f2fd;border:1px solid #a7aae3;}
 
+.folderrecycle{overflow:hidden;width:100px;height:100px;float:left;margin-left:15px;background:url(images/folder.png) center top no-repeat;border:1px solid #fff;position:relative;transition:all 0.2s ease-in 0.1s;}
+.folderrecycle.bgclocrc{background:url(images/folder.png) center top no-repeat #f1f2fd;border:1px solid #a7aae3;}
+.folderrecycle:hover{background:url(images/folder.png) center top no-repeat #f1f2fd;border:1px solid #a7aae3;}
+
+.filerecycle{overflow:hidden;width:100px;height:100px;float:left;margin-left:15px;background:url(images/file.png) center top no-repeat;border:1px solid #fff;position:relative;transition:all 0.2s ease-in 0.1s;}
+.filerecycle.bgclocrc{background:url(images/file.png) center top no-repeat #f1f2fd;border:1px solid #a7aae3;}
+.filerecycle:hover{background:url(images/file.png) center top no-repeat #f1f2fd;border:1px solid #a7aae3;}
+
+
 .folderdiv{width:100px;height:100px; }
 .filediv{width:100px;height:100px; }
+
+.doc{overflow:hidden;width:100px;height:100px;float:left;margin-left:15px;background:url(images/doc.png) center top no-repeat;border:1px solid #fff;position:relative;transition:all 0.2s ease-in 0.1s;}
+.doc.bgclocrc{background:url(images/doc.png) center top no-repeat #f1f2fd;border:1px solid #a7aae3;}
+.doc:hover{background:url(images/doc.png) center top no-repeat #f1f2fd;border:1px solid #a7aae3;}
 
 .ppt{overflow:hidden;width:100px;height:100px;float:left;margin-left:15px;background:url(images/ppt.png) center top no-repeat;border:1px solid #fff;position:relative;transition:all 0.2s ease-in 0.1s;}
 .ppt.bgclocrc{background:url(images/ppt.png) center top no-repeat #f1f2fd;border:1px solid #a7aae3;}
@@ -92,10 +105,6 @@
 .file{overflow:hidden;width:100px;height:100px;float:left;margin-left:15px;background:url(images/file.png) center top no-repeat;border:1px solid #fff;position:relative;transition:all 0.2s ease-in 0.1s;}
 .file.bgclocrc{background:url(images/file.png) center top no-repeat #f1f2fd;border:1px solid #a7aae3;}
 .file:hover{background:url(images/file.png) center top no-repeat #f1f2fd;border:1px solid #a7aae3;}
-
-.doc{overflow:hidden;width:100px;height:100px;float:left;margin-left:15px;background:url(images/doc.png) center top no-repeat;border:1px solid #fff;position:relative;transition:all 0.2s ease-in 0.1s;}
-.doc.bgclocrc{background:url(images/doc.png) center top no-repeat #f1f2fd;border:1px solid #a7aae3;}
-.doc:hover{background:url(images/doc.png) center top no-repeat #f1f2fd;border:1px solid #a7aae3;}
 
 
 
