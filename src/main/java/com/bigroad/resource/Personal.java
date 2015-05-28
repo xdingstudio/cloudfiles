@@ -98,7 +98,7 @@ public class Personal {
 			@PathParam("folderid") String folderID) {
 		System.out.println(folderID
 				+ "-----------------------------------------------------");
-		String uploadedFileLocation = "D://upload/"
+		String uploadedFileLocation = "/upload/"
 				+ fileDetail.getFileName();
 		// save it
 		writeToFile(uploadedInputStream, uploadedFileLocation);
@@ -181,14 +181,14 @@ public class Personal {
 	}
 
 	@POST
-	@Path("{userid}/{folderid}/{fileid}")
-	@Produces(MediaType.APPLICATION_JSON)
+	@Path("changefilename/{fileid}")
+
 	public Response changeFileName(@PathParam("fileid") String fileid,
-			@FormParam("foldername") String foldername,
+			@FormParam("filename") String filename,
 			@Context HttpHeaders headers) {
 		if (headers.getRequestHeaders().getFirst("X-Auth-Token").equals("sss")) {
-			personFile.updateFileName(fileid, "file", foldername);
-			System.out.println(fileid + foldername);
+			personFile.updateFileName(fileid, "file", filename);
+			System.out.println(fileid + filename);
 			return Response.ok().build();
 		} else {
 			return Response.status(403).build();
@@ -196,7 +196,7 @@ public class Personal {
 	}
 
 	@POST
-	@Path("name/{userid}/{folderid}")
+	@Path("changefoldername/{folderid}")
 	
 	public Response changeFolderName(@PathParam("folderid") String folderID,
 			@FormParam("foldername") String foldername,
@@ -280,7 +280,8 @@ public class Personal {
 			List<PersonFileJson> f = personFile.getAllMusic(userid);
 			return f;
 		} else {
-			return new ArrayList<PersonFileJson>();
+//			return new ArrayList<PersonFileJson>();
+			return null;
 		}
 	}
 
@@ -294,7 +295,8 @@ public class Personal {
 			List<PersonFileJson> f = personFile.getAllVedio(userid);
 			return f;
 		} else {
-			return new ArrayList<PersonFileJson>();
+//			return new ArrayList<PersonFileJson>();
+			return null;
 		}
 	}
 
@@ -308,7 +310,8 @@ public class Personal {
 			List<PersonFileJson> f = personFile.getAllPicture(userid);
 			return f;
 		} else {
-			return new ArrayList<PersonFileJson>();
+//			return new ArrayList<PersonFileJson>();
+			return null;
 		}
 	}
 
@@ -322,7 +325,8 @@ public class Personal {
 			List<PersonFileJson> f = personFile.getAllDocument(userid);
 			return f;
 		} else {
-			return new ArrayList<PersonFileJson>();
+//			return new ArrayList<PersonFileJson>();
+			return null;
 		}
 	}
 
@@ -337,39 +341,11 @@ public class Personal {
 			List<PersonFileJson> f = personFile.getAllMyRecycle(userid);
 			return f;
 		} else {
-			return new ArrayList<PersonFileJson>();
+//			return new ArrayList<PersonFileJson>();
+			return null;
 		}
 	}
 
-//	@PUT
-//	// 从回收站回收                                                               (就差这个从回收站还原的功能啦！)
-//	@Path("{userid}/recover/{fileid}")
-//	@Produces(MediaType.APPLICATION_JSON)
-//	public Response recoverRecycleFile(@PathParam("fileid") String fileID,
-//			@FormParam("filetype") String fileType,
-//			@Context HttpHeaders headers) {
-//		if (headers.getRequestHeaders().getFirst("X-Auth-Token").equals("sss")) 
-//		{
-//			if (fileType.equals("file")) 
-//			{
-//				//......
-//				System.out.println("----------------" + fileID + " " + fileType);
-//				return Response.ok().build();
-//			} 
-//			else if (fileType.equals("folder")) 
-//			{
-//				//.....
-//				System.out.println("----------------" + fileID + " " + fileType);
-//				return Response.ok().build();
-//			}
-//			return Response.status(403).build();
-//		} 
-//		else 
-//		{
-//			return Response.status(403).build();
-//		}
-//	}
-	
 	@GET
 	@Path("download/{userid}/{folderid}/{fileid}/{filename}")
 	@Produces(MediaType.APPLICATION_OCTET_STREAM)
@@ -378,7 +354,7 @@ public class Personal {
 			@PathParam("filename") String fileName,
 			@Context ServletContext application){
 		
-		   String uploadedFileLocation = "D://upload/"+ fileName;
+		   String uploadedFileLocation = "/upload/"+ fileName;
 		   System.out.println(uploadedFileLocation+"---------------------------------------------------");
 		   File file = new File(uploadedFileLocation);
 		   if (!file.exists()) {

@@ -22,13 +22,25 @@
 .doc.bgclocrc{background:url(images/doc.png) center top no-repeat #f1f2fd;border:1px solid #a7aae3;}
 .doc:hover{background:url(images/doc.png) center top no-repeat #f1f2fd;border:1px solid #a7aae3;}
 
+.docx{overflow:hidden;width:100px;height:100px;float:left;margin-left:15px;background:url(images/doc.png) center top no-repeat;border:1px solid #fff;position:relative;transition:all 0.2s ease-in 0.1s;}
+.docx.bgclocrc{background:url(images/doc.png) center top no-repeat #f1f2fd;border:1px solid #a7aae3;}
+.docx:hover{background:url(images/doc.png) center top no-repeat #f1f2fd;border:1px solid #a7aae3;}
+
 .ppt{overflow:hidden;width:100px;height:100px;float:left;margin-left:15px;background:url(images/ppt.png) center top no-repeat;border:1px solid #fff;position:relative;transition:all 0.2s ease-in 0.1s;}
 .ppt.bgclocrc{background:url(images/ppt.png) center top no-repeat #f1f2fd;border:1px solid #a7aae3;}
 .ppt:hover{background:url(images/ppt.png) center top no-repeat #f1f2fd;border:1px solid #a7aae3;}
 
+.pptx{overflow:hidden;width:100px;height:100px;float:left;margin-left:15px;background:url(images/ppt.png) center top no-repeat;border:1px solid #fff;position:relative;transition:all 0.2s ease-in 0.1s;}
+.pptx.bgclocrc{background:url(images/ppt.png) center top no-repeat #f1f2fd;border:1px solid #a7aae3;}
+.pptx:hover{background:url(images/ppt.png) center top no-repeat #f1f2fd;border:1px solid #a7aae3;}
+
 .xls{overflow:hidden;width:100px;height:100px;float:left;margin-left:15px;background:url(images/xls.png) center top no-repeat;border:1px solid #fff;position:relative;transition:all 0.2s ease-in 0.1s;}
 .xls.bgclocrc{background:url(images/xls.png) center top no-repeat #f1f2fd;border:1px solid #a7aae3;}
 .xls:hover{background:url(images/xls.png) center top no-repeat #f1f2fd;border:1px solid #a7aae3;}
+
+.xlsx{overflow:hidden;width:100px;height:100px;float:left;margin-left:15px;background:url(images/xls.png) center top no-repeat;border:1px solid #fff;position:relative;transition:all 0.2s ease-in 0.1s;}
+.xlsx.bgclocrc{background:url(images/xls.png) center top no-repeat #f1f2fd;border:1px solid #a7aae3;}
+.xlsx:hover{background:url(images/xls.png) center top no-repeat #f1f2fd;border:1px solid #a7aae3;}
 
 .exe{overflow:hidden;width:100px;height:100px;float:left;margin-left:15px;background:url(images/exe.png) center top no-repeat;border:1px solid #fff;position:relative;transition:all 0.2s ease-in 0.1s;}
 .exe.bgclocrc{background:url(images/exe.png) center top no-repeat #f1f2fd;border:1px solid #a7aae3;}

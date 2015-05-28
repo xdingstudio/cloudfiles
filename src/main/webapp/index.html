@@ -579,8 +579,10 @@
 					  
 						  else if (value.fileType == '3'){
 							  $("#filepath").append(
-								    	"<li id='"+value.fileId+"'><i class='icon-home home-icon'></i><a >我的网盘</a></li>"
+								    	"<li id='"+value.fileId+"'><i class='icon-home home-icon'></i><a class='path' >我的网盘</a></li>"
 								       );
+							  $('a.path').css({'cursor':'pointer'});
+
 						  }	
 					
 				   });
@@ -632,8 +634,9 @@
                                                                                        var frontname =    $("#filepath li:last-child")[0].innerHTML;
                                                                                        
                                                                                        $("#filepath li:last-child").removeClass("active");
-                                                                                       $("#filepath li:last-child")[0].innerHTML="<a >"+frontname+"</a>";
+                                                                                       $("#filepath li:last-child")[0].innerHTML="<a class='path'>"+frontname+"</a>";
                                                                                        $("#filepath").append("<li  class='active'  id='"+folderid+"'>" +name+"</li>" );
+                                                                                       $('a.path').css({'cursor':'pointer'});
                                                                                    }
                                                                                   $("#divall").empty();
                                                                                    $.each(jsonData.personFileJson, function(id, value) {
@@ -667,12 +670,55 @@
                 
 				}
 			}]
+			,
+            [{
+            text: "移动文件夹",
+            func: function() {
+                  moveFile("folder",opFileID);
+            }
+             }]
+		   ,
+		   [{
+	            text: "修改文件夹名",
+	            func: function() {
+	            	 var  filename = prompt("请输入文件夹名:","");
+	                 if (filename != null && filename != ""){
+	                     var fileid =  opFileID;
+	                     var folderid =   $("#filepath li:last-child").attr("id");
+	                     var url="v1.0/person/changefoldername/"+fileid;
+	                     //alert("fileid:"+fileid);
+	                     //alert("folderid:"+folderid);
+	                     var data = {"foldername":filename};
+	                     $.ajax({
+	 						type: 'POST',
+	 						url:url,
+	 				
+	 						data: {'foldername':filename},
+	 				
+	 						success: function(data){
+	 							refreshPage(folderid,userID);
+	 						},
+	 						error: function()
+	 						{
+	 							alert("修改文件夹名失败");
+	 						},
+	 						headers: {
+	 							"X-Auth-Token":"sss"
+	 						}
+	 			       });
+	               }else{
+	               alert("文件夹名为空");
+	                } 
+	            }
+	             }]
 		   ,
 			[{
 				text: "删除文件夹",
 				func: function() {
                     {
                                                                             var folderid =   $("#filepath li:last-child").attr("id");
+                                                                            //alert("folderid:"+folderid);
+                                                                           // alert("opFileID:"+opFileID);
                         
                                                                             var urlN = 'v1.0/person/'+userID+'/'+opFileID;
                                                                             
@@ -687,7 +733,7 @@
                                                                                 },
                                                                                 error: function()
                                                                                 {
-                                                                                    alert("fail");                                                                                    
+                                                                                    alert("删除失败");                                                                                    
                                                                                 },
                                                                                 headers: {
                                                                                     "X-Auth-Token":"sss"
@@ -698,18 +744,7 @@
                     }
 				}
 			}]
-		　,[{
-				text: "分享文件夹",
-				func: function() {
-					  alert("分享文件夹:1");
-				}
-			}],
-                    [{
-                    text: "移动文件夹",
-                    func: function() {
-                          moveFile("folder",opFileID);
-                    }
-                     }]
+		　
 		];
 
 		
@@ -736,10 +771,23 @@ $("body").on("mousedown",".folder",function(e){
 		 
 		});
 		
+		
+$("body").on("mousedown","#filepath .path",function(e){
+
+    //DoSomeThing
+  	var e = e || window.event;
+ 	var folderid = $(this).parent().attr("id");
+ 	 	
+ 	if(e.button == "0"){          
+ 		$(this).parent().nextAll().remove();
+    	refreshPage(folderid,userID);
+    }
+                                                                             
+});
 		                
 	$("body").on("dblclick",".folderdiv",function(){
 			 //   alert("click");
-			   // alert($(this).attr("id"));
+			   // alert($(this).attr("id"));F
 				var urlN = 'v1.0/person/'+userID+'/'+$(this).attr("id");
 				var folderid=$(this).attr("id");
 				var name = $(this).children().val();
@@ -751,7 +799,7 @@ $("body").on("mousedown",".folder",function(e){
 						type: 'GET',
 						url:urlN,
 						dataType:'json',
-						data: {},
+						Fdata: {},
 						async:false,
 						success: function(data){
 							  var jsonData = eval(data);
@@ -763,8 +811,9 @@ $("body").on("mousedown",".folder",function(e){
 						    	   var frontname =    $("#filepath li:last-child")[0].innerHTML;
 						    	   //alert(frontname);
 						    	   $("#filepath li:last-child").removeClass("active");
-						    	   $("#filepath li:last-child")[0].innerHTML="<a >"+frontname+"</a>";
+						    	   $("#filepath li:last-child")[0].innerHTML="<a class='path'>"+frontname+"</a>";
 						    	   $("#filepath").append("<li  class='active'  id='"+folderid+"'>" +name+"</li>" );
+						    	   $('a.path').css({'cursor':'pointer'});
 						       }
 							  $("#divall").empty();
 						       $.each(jsonData.personFileJson, function(id, value) {
@@ -855,6 +904,45 @@ $("body").on("mousedown",".folder",function(e){
 					window.open('v1.0/person/download/'+userID+'/'+folderid+'/'+opFileID+'/'+fileName); 
 				}
 			}]
+			,
+            [{
+            text: "移动文件",
+            func: function() {
+                 moveFile("file",opFileID);
+            }
+             }]
+			,
+            [{
+            text: "修改文件名",
+            func: function() {
+            	 var  filename = prompt("请输入文件名:","");
+                 if (filename != null && filename != ""){
+                     var fileid =   $(this).attr("id");
+                     var folderid =   $("#filepath li:last-child").attr("id");
+                     var url="v1.0/person/changefilename/"+fileid;
+                     var data = {"filename":filename};
+                     $.ajax({
+ 						type: 'POST',
+ 						url:url,
+ 				
+ 						data: {'filename':filename},
+ 				
+ 						success: function(data){
+ 							refreshPage(folderid,userID);
+ 						},
+ 						error: function()
+ 						{
+ 							alert("修改文件名失败");
+ 						},
+ 						headers: {
+ 							"X-Auth-Token":"sss"
+ 						}
+ 			       });
+               }else{
+               alert("文件名为空");
+                } 
+            }
+             }]
 		   ,
 			[{
 				text: "删除文件",
@@ -863,10 +951,7 @@ $("body").on("mousedown",".folder",function(e){
                                                                             var folderid =$("#filepath li:last-child").attr("id");
                                                                    			var urlN = 'v1.0/person/'+userID+'/'+folderid+'/'+opFileID;
                                                                    			
-                                                                   			alert("opFileID:"+opFileID);
-                        
-                                                                     
-                                                                                $.ajax({
+                                                                   		        $.ajax({
                                                                                 type: 'DELETE',
                                                                                 url:urlN,
                                                                                 data: {},
@@ -886,37 +971,26 @@ $("body").on("mousedown",".folder",function(e){
                     }
 				}
 			}]
-			,[{
-				text: "分享文件",
-				func: function() {
-					  alert("分享文件:1");
-				}
-			}],
-                    [{
-                    text: "移动文件",
-                    func: function() {
-                         moveFile("file",opFileID);
-                    }
-                     }]
+			
 		];
 
 
-		$(".changename").on('focus' , function(){
-					 $(this).css('border','1px solid #FF0000');
-				 $(this).val('');
-		 });
+//		$(".changename").on('focus' , function(){
+//					 $(this).css('border','1px solid #FF0000');
+//				 $(this).val('');
+//		 });
 		
-		$("body").on("blur",".changename",function(){
-					
-					alert('确定修改文件名？');
-					 $(this).css('border','none');
-					 if( $(this).val() == ""){
-						 $(this).val('新建文件夹');
-						 }else{
-							// $(this).parent().find('span').text() = $(this).value; 
-							 }
-
-		});
+//		$("body").on("blur",".changename",function(){
+//					
+//					alert('确定修改文件名？');
+//					 $(this).css('border','none');
+//					 if( $(this).val() == ""){
+//						 $(this).val('新建文件夹');
+//						 }else{
+//							// $(this).parent().find('span').text() = $(this).value; 
+//							 }
+//
+//		});
 		
 		$("#uploadinput").on('change',function(){
 			uploadFile();
@@ -926,7 +1000,7 @@ $("body").on("mousedown",".folder",function(e){
 			   var  filename = prompt("请输入文件名:","");
                     if (filename != null && filename != ""){
                         var folderid =   $("#filepath li:last-child").attr("id");
-                        var url="v1.0/person/"+ userID+"/"+folderid;
+                        var url="v1.0/person/"+userID+"/"+folderid;
                         var data = {"foldername":filename};
                         $.ajax({
     						type: 'POST',
@@ -1048,8 +1122,10 @@ $("body").on("mousedown",".folder",function(e){
 		  
 		      function uploadComplete(evt) {  
 		        /* This event is raised when the server send back a response */  
-		        alert(evt.target.responseText);  
-		      }  
+		        var folderid =   $("#filepath li:last-child").attr("id");
+		        alert("上传成功");  
+		        refreshPage(folderid,userID);
+		       }  
 		  
 		      function uploadFailed(evt) {  
 		        alert("There was an error attempting to upload the file.");  
@@ -1140,13 +1216,16 @@ $("body").on("mousedown",".folder",function(e){
 							async:false,
 							success: function(data){
                                 var jsonData = eval(data);
-                                var lengthhhh=0;
+                                var length=0;
                                 $("#divall").empty();
-                                $.each(jsonData.personFileJson, function(id, value) {
+                                //$(".icon-home home-icon").parent().nextAll().remove();
+								$.each(jsonData.personFileJson, function(id, value) {
+                                	//alert("进入type");
                                    if(value.fileType == 1)
                                     {
-                                        lengthhhh++;
-                                        if(type == 'recycle')
+                                	   length++;
+                                	   //alert("length:"+length);
+                                       if(type == 'recycle')
                             			{
                                         	 $("#divall").append(
                                         			 "<li class='folderrecycle'>" +"<div class='folderrecyclediv' id='"+value.fileId+"'>"+"<input type='text' class='changename' value='"+value.fileName+"'>"+"</div>" +"</li>"
@@ -1162,8 +1241,9 @@ $("body").on("mousedown",".folder",function(e){
                                     }
                                     else if(value.fileType == 0)
                                     {
-                                        lengthhhh++;                                        
-                                        if(type == 'recycle')
+                                    	length++;
+                                    	//alert("length:"+length);
+                                       if(type == 'recycle')
                             			{
                                         	$("#divall").append(
                                         			 "<li class='filerecycle'>" +"<div class='filerecyclediv' id='"+value.fileId+"'>"+"<input type='text' class='changename' value='"+value.fileName+"'>"+"</div>" +"</li>"
@@ -1176,14 +1256,16 @@ $("body").on("mousedown",".folder",function(e){
                             				);
                             			}
                                                                                
-                                     };
+                                     }
+                                   
 								});
-							     if(lengthhhh==0)
-                                 {
-                                     $("#divall").append(
-                                            "<li>"+"<h1>无满足类型的文件!</h1>" +"</li>"
-                                             );
+                                if(length == 0)
+                                {
+                                         $("#divall").append(
+                                                "<li>"+"<h1>无满足类型的文件!</h1>" +"</li>"
+                                                 );
                                  }
+							  
 							},
 							error: function()
 							{
@@ -1216,13 +1298,20 @@ $("body").on("mousedown",".folder",function(e){
 
                 });
                 
-            var folderrecyclemenu = [
-           		      			[{
+            var folderrecyclemenu = [                                     
+
+   [{
+   text: "移动文件夹",
+   func: function() {
+         moveFile("folder",opFileID);
+   }
+    }]
+           		      			,[{
            		      				text: "删除文件夹",
            		      				func: function() {
            		                          {
            		                                                                                  var folderid =   $("#filepath li:last-child").attr("id");
-           		                              
+           		                                                                                             		                              
            		                                                                                  var urlN = 'v1.0/person/'+userID+'/recycle/'+opFileID;
            		                             
            		                                                                                  var name = $(this).children().val();
@@ -1247,13 +1336,7 @@ $("body").on("mousedown",".folder",function(e){
            		                          }
            		      				}
            		      			}]
-           		      		　,
-           		                          [{
-           		                          text: "移动文件夹",
-           		                          func: function() {
-           		                                moveFile("folder",opFileID);
-           		                          }
-           		                           }]
+           		      		　
            		      		];
 
                
@@ -1278,8 +1361,15 @@ $("body").on("mousedown",".folder",function(e){
             
                   
         var filerecyclemenu = [
+                           	
+                            [{
+                            text: "移动文件",
+                            func: function() {
+                                 moveFile("file",opFileID);
+                            }
+                             }]
             		
-            			[{
+            			,[{
             				text: "删除文件",
             				func: function() {
                                 {
@@ -1293,8 +1383,8 @@ $("body").on("mousedown",".folder",function(e){
                                                                                             data: {},
                                                                                             async:false,
                                                                                             success: function(data){
-                                                                                                refreshPage(folderid,userID);
-                                                                                            },
+                                                                                            	typeShow('recycle');
+                                                                                           },
                                                                                             error: function()
                                                                                             {
                                                                                                 alert("fail");
@@ -1306,13 +1396,7 @@ $("body").on("mousedown",".folder",function(e){
                                 }
             				}
             			}]
-            			,
-                                [{
-                                text: "移动文件",
-                                func: function() {
-                                     moveFile("file",opFileID);
-                                }
-                                 }]
+            		
             		];
 
 });

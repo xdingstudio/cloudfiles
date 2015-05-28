@@ -100,12 +100,20 @@ public class PersonFileServiceImpl implements PersonFileServiceI {
 		List<TFile> documentlist4=fileDao.searchByfileExtension(".html", userID);
 		List<TFile> documentlist5=fileDao.searchByfileExtension(".zip", userID);
 		List<TFile> documentlist6=fileDao.searchByfileExtension(".rar", userID);
+		List<TFile> documentlist7=fileDao.searchByfileExtension(".docx", userID);
+		List<TFile> documentlist8=fileDao.searchByfileExtension(".pptx", userID);
+		List<TFile> documentlist9=fileDao.searchByfileExtension(".xls", userID);
+		List<TFile> documentlist10=fileDao.searchByfileExtension(".xlsx", userID);
 		documentlist.addAll(documentlist1);
 		documentlist.addAll(documentlist2);
 		documentlist.addAll(documentlist3);
 		documentlist.addAll(documentlist4);
 		documentlist.addAll(documentlist5);
 		documentlist.addAll(documentlist6);
+		documentlist.addAll(documentlist7);
+		documentlist.addAll(documentlist8);
+		documentlist.addAll(documentlist9);
+		documentlist.addAll(documentlist10);
 		List<PersonFileJson> personFileListJsonList=listToJson.listToJson(documentlist);
 		return personFileListJsonList;
 	}
